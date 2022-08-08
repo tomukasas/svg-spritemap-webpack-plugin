@@ -371,3 +371,26 @@ it('Should include spritemap inside generated chunk', (done) => {
         done();
     });
 });
+
+it('Should move mask(-s) to the root when generating symbol', async () => {
+    const output = fs.readFileSync(path.resolve(__dirname, 'output/svg/with-masks.svg'), 'utf-8').trim();
+    const svg = await generateSVG([{
+        path: path.resolve(__dirname, 'input/svg/with-masks.svg'),
+        content: fs.readFileSync(path.resolve(__dirname, 'input/svg/with-masks.svg'), 'utf-8')
+    }], formatOptions({
+        output: {
+            svgo: false,
+            filename: 'app-icon-sprite.svg'
+        },
+        sprite: {
+            generate: {
+                symbol: true,
+                use: true
+            }
+        }
+    }));
+
+    //fs.writeFileSync(path.resolve(__dirname, 'output/sprite.svg'), svg)
+
+    expect(svg).toEqual(output);
+})
