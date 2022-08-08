@@ -390,7 +390,5 @@ it('Should move mask(-s) to the root when generating symbol', async () => {
         }
     }));
 
-    //fs.writeFileSync(path.resolve(__dirname, 'output/sprite.svg'), svg)
-
     expect(svg).toEqual(output);
 })
